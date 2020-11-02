@@ -20,7 +20,7 @@ SitesRequireQueue = [ SitesAvailable.SLURM_DEFAULT,
 
 
 SitesRequireProject = [ SitesAvailable.SLURM_DEFAULT,
-                        SitesAvailable,LSF_DEFAULT,
+                        SitesAvailable.LSF_DEFAULT,
                         SitesAvailable.SUMMIT_GLITE, 
                         SitesAvailable.SUMMIT_KUBERNETES ]
 
