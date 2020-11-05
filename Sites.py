@@ -223,18 +223,18 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 )
 @click.option(
     "--project-name",
-    default="",
+    default=None,
     show_default=True,
     help="Project allocation"
 )
 @click.option(
     "--queue-name",
-    default="",
+    default=None,
     help="Target execution site's queue"
 )
 @click.option(
     "--pegasus-home",
-    default="",
+    default=None,
     show_default=True,
     help="Pegasus home directory location"
 )
@@ -254,16 +254,15 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 def main(scratch_parent_dir, storage_parent_dir, execution_site, project_name, queue_name, pegasus_home):
     execution_site = SitesAvailable[execution_site]
     
-    if execution_site in SitesRequireQueue and queue_name == "":
+    if execution_site in SitesRequireQueue and queue_name is None:
         queue_name = click.prompt("What's the execution site's queue")
     
-    if project_name == "":
-        if execution_site in SitesRequireProject:
-            project_name = click.prompt("What's your project's name")
-        if execution_site in SitesMayRequireProject:
-            project_name = click.prompt("What's your project's name", default="", show_default=True)
+    if execution_site in SitesRequireProject and not project_name:
+        project_name = click.prompt("What's your project's name")
+    elif execution_site in SitesMayRequireProject and project_name is None:
+        project_name = click.prompt("What's your project's name", default="", show_default=True)
     
-    if execution_site in SitesRequirePegasusHome and pegasus_home == "":
+    if execution_site in SitesRequirePegasusHome and pegasus_home is None:
         pegasus_home = click.prompt("What's the location of the PEGASUS_HOME dir", default="", show_default=True)
     
     click.echo("Generating a Pegasus site catalog for {}".format(execution_site))
