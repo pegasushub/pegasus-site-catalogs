@@ -113,7 +113,7 @@ class MySite():
 
 
     def slurm(self, project_name, queue_name, pegasus_home):
-        slurm = Site(self.exec_site_name, arch=self.exec_site_arch)\
+        slurm = Site(self.exec_site_name)\
                     .add_directories(
                         Directory(Directory.SHARED_SCRATCH, os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"))
                             .add_file_servers(FileServer("file://" + os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"), Operation.ALL))
@@ -123,7 +123,7 @@ class MySite():
                         style="glite",
                         queue=queue_name,
                         data_configuration="sharedfs",
-                        auxillary_local=True,
+                        auxillary_local="true",
                         nodes=1,
                         ppn=1,
                         runtime=1800,
@@ -140,7 +140,7 @@ class MySite():
 
 
     def lsf(self, project_name, queue_namem, pegasus_home):
-        lsf = Site(self.exec_site_name, arch=self.exec_site_arch)\
+        lsf = Site(self.exec_site_name)\
                     .add_directories(
                         Directory(Directory.SHARED_SCRATCH, os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"))
                             .add_file_servers(FileServer("file://" + os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"), Operation.ALL))
@@ -150,7 +150,7 @@ class MySite():
                         style="glite",
                         queue=queue_name,
                         data_configuration="sharedfs",
-                        auxillary_local=True,
+                        auxillary_local="true",
                         nodes=1,
                         runtime=1800,
                         clusters_num=2
@@ -166,7 +166,7 @@ class MySite():
                         
 
     def summit_glite(self, project_name, queue_name):
-        summit = Site(self.exec_site_name, arch=self.exec_site_arch)\
+        summit = Site(self.exec_site_name)\
                     .add_directories(
                         Directory(Directory.SHARED_SCRATCH, os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"))
                             .add_file_servers(FileServer("file://" + os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"), Operation.ALL))
@@ -176,7 +176,7 @@ class MySite():
                         style="glite",
                         queue=queue_name,
                         data_configuration="sharedfs",
-                        auxillary_local=True,
+                        auxillary_local="true",
                         nodes=1,
                         project=project_name,
                         job_aggregator="mpiexec",
@@ -189,7 +189,7 @@ class MySite():
                         
 
     def summit_kubernetes(self, project_name, queue_name):
-        summit = Site(self.exec_site_name, arch=self.exec_site_arch)\
+        summit = Site(self.exec_site_name)\
                     .add_grids(
                         Grid(grid_type=Grid.BATCH, scheduler_type=Scheduler.LSF, contact="${USER}@dtn.ccs.ornl.gov", job_type=SupportedJobs.COMPUTE),
                         Grid(grid_type=Grid.BATCH, scheduler_type=Scheduler.LSF, contact="${USER}@dtn.ccs.ornl.gov", job_type=SupportedJobs.AUXILLARY)
@@ -201,8 +201,8 @@ class MySite():
                     .add_pegasus_profile(
                         style="ssh",
                         queue=queue_name,
-                        auxillary_local=True,
-                        change_dir=True,
+                        auxillary_local="true",
+                        change_dir="true",
                         nodes=1,
                         project=project_name,
                         job_aggregator="mpiexec",
