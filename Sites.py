@@ -56,6 +56,7 @@ class MySite():
 
         self.sc.add_sites(local)
         
+        self.exec_site_arch = None
         if target_site is SitesAvailable.LOCAL_CONDOR:
             self.exec_site_name = "condorpool"
             self.condorpool()
@@ -67,9 +68,11 @@ class MySite():
             self.lsf(project_name, queue_name, pegasus_home)
         elif target_site is SitesAvailable.SUMMIT_GLITE:
             self.exec_site_name = "summit"
+            self.exec_site_arch = Arch.PPC64LE
             self.summit_glite(project_name, "batch")
         elif target_site is SitesAvailable.SUMMIT_KUBERNETES:
             self.exec_site_name = "summit"
+            self.exec_site_arch = Arch.PPC64LE
             self.summit_kubernetes(project_name, "batch")
 
 
@@ -110,7 +113,7 @@ class MySite():
 
 
     def slurm(self, project_name, queue_name, pegasus_home):
-        slurm = Site(self.exec_site_name)\
+        slurm = Site(self.exec_site_name, arch=self.exec_site_arch)\
                     .add_directories(
                         Directory(Directory.SHARED_SCRATCH, os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"))
                             .add_file_servers(FileServer("file://" + os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"), Operation.ALL))
@@ -137,7 +140,7 @@ class MySite():
 
 
     def lsf(self, project_name, queue_name):
-        lsf = Site(self.exec_site_name)\
+        lsf = Site(self.exec_site_name, arch=self.exec_site_arch)\
                     .add_directories(
                         Directory(Directory.SHARED_SCRATCH, os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"))
                             .add_file_servers(FileServer("file://" + os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"), Operation.ALL))
@@ -163,7 +166,7 @@ class MySite():
                         
 
     def summit_glite(self, project_name, queue_name):
-        summit = Site(self.exec_site_name)\
+        summit = Site(self.exec_site_name, arch=self.exec_site_arch)\
                     .add_directories(
                         Directory(Directory.SHARED_SCRATCH, os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"))
                             .add_file_servers(FileServer("file://" + os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"), Operation.ALL))
@@ -186,7 +189,7 @@ class MySite():
                         
 
     def summit_kubernetes(self, project_name, queue_name):
-        summit = Site(self.exec_site_name)\
+        summit = Site(self.exec_site_name, arch=self.exec_site_arch)\
                     .add_grids(
                         Grid(grid_type=Grid.BATCH, scheduler_type=Scheduler.LSF, contact="${USER}@dtn.ccs.ornl.gov", job_type=SupportedJobs.COMPUTE),
                         Grid(grid_type=Grid.BATCH, scheduler_type=Scheduler.LSF, contact="${USER}@dtn.ccs.ornl.gov", job_type=SupportedJobs.AUXILLARY)
