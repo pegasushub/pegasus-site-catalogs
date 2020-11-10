@@ -7,11 +7,20 @@ from Pegasus.api import *
 
 @unique
 class SitesAvailable(Enum):
-    LOCAL_CONDOR = 1
+    CONDORPOOL = 1
     SLURM = 2
     LSF = 3
     SUMMIT_GLITE = 4
     SUMMIT_KUBERNETES = 5
+
+
+SitesAvailableDescription = {
+    SitesAvailable.CONDORPOOL: "Local Machine Condor Pool".
+    SitesAvailable.SLURM: "Local SLURM Cluster",
+    SitesAvailable.LSF: "Local LSF Cluster",
+    SitesAvailable.SUMMIT_GLITE: "OLCF Summit from OLCF Headnode"
+    SitesAvailable.SUMMIT_KUBERNETES: "OLCF Summit from OLCF Hosted Kubernetes Pod"
+}
 
 
 SitesRequireQueue = [ 
@@ -57,7 +66,7 @@ class MySite():
         self.sc.add_sites(local)
         
         self.exec_site_arch = None
-        if target_site is SitesAvailable.LOCAL_CONDOR:
+        if target_site is SitesAvailable.CONDORPOOL:
             self.exec_site_name = "condorpool"
             self.condorpool()
         elif target_site is SitesAvailable.SLURM:
