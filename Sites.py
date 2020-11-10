@@ -15,10 +15,10 @@ class SitesAvailable(Enum):
 
 
 SitesAvailableDescription = {
-    SitesAvailable.CONDORPOOL: "Local Machine Condor Pool".
+    SitesAvailable.CONDORPOOL: "Local Machine Condor Pool",
     SitesAvailable.SLURM: "Local SLURM Cluster",
     SitesAvailable.LSF: "Local LSF Cluster",
-    SitesAvailable.SUMMIT_GLITE: "OLCF Summit from OLCF Headnode"
+    SitesAvailable.SUMMIT_GLITE: "OLCF Summit from OLCF Headnode",
     SitesAvailable.SUMMIT_KUBERNETES: "OLCF Summit from OLCF Hosted Kubernetes Pod"
 }
 
