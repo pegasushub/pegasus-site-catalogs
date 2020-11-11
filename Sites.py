@@ -275,7 +275,7 @@ def main(scratch_parent_dir, storage_parent_dir, execution_site, project_name, q
         project_name = click.prompt("What's your project's name", default="", show_default=True)
     
     if execution_site in SitesRequirePegasusHome and pegasus_home is None:
-        pegasus_home = click.prompt("What's the location of the PEGASUS_HOME dir", default="", show_default=True)
+        pegasus_home = click.prompt("What's the location of the PEGASUS_HOME dir on the compute nodes", default="", show_default=True)
     
     click.echo("Generating a Pegasus site catalog for {}".format(execution_site))
     if queue_name:
