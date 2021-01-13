@@ -211,6 +211,7 @@ class MySite():
                         style="ssh",
                         queue=queue_name,
                         auxillary_local="true",
+                        data_configuration="sharedfs",
                         change_dir="true",
                         nodes=1,
                         project=project_name,
