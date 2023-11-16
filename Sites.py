@@ -148,7 +148,7 @@ class MySite():
         self.sc.add_sites(slurm)
 
 
-    def lsf(self, project_name, queue_namem, pegasus_home):
+    def lsf(self, project_name, queue_name, pegasus_home):
         lsf = Site(self.exec_site_name)\
                     .add_directories(
                         Directory(Directory.SHARED_SCRATCH, os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"))
