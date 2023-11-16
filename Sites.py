@@ -10,9 +10,9 @@ class SitesAvailable(Enum):
     CONDORPOOL = 1
     SLURM = 2
     LSF = 3
-    SUMMIT_GLITE = 4
-    SUMMIT_KUBERNETES = 5
-    SGE = 6
+    SGE = 4
+    SUMMIT_GLITE = 5
+    SUMMIT_KUBERNETES = 6
 
 
 SitesAvailableDescription = {
@@ -27,19 +27,22 @@ SitesAvailableDescription = {
 
 SitesRequireQueue = [ 
     SitesAvailable.SLURM,
-    SitesAvailable.LSF 
+    SitesAvailable.LSF,
+    SitesAvailable.SGE
 ]
 
 
 SitesRequirePegasusHome = [ 
     SitesAvailable.SLURM,
-    SitesAvailable.LSF
+    SitesAvailable.LSF,
+    SitesAvailable.SGE
 ]
 
 
 SitesMayRequireProject = [
     SitesAvailable.SLURM,
     SitesAvailable.LSF,
+    SitesAvailable.SGE
 ]
 
 
