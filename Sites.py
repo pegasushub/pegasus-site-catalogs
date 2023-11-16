@@ -12,12 +12,14 @@ class SitesAvailable(Enum):
     LSF = 3
     SUMMIT_GLITE = 4
     SUMMIT_KUBERNETES = 5
+    SGE = 6
 
 
 SitesAvailableDescription = {
     SitesAvailable.CONDORPOOL: "Local Machine Condor Pool",
     SitesAvailable.SLURM: "Local SLURM Cluster",
     SitesAvailable.LSF: "Local LSF Cluster",
+    SitesAvailable.SGE: "Local SGE Cluster",
     SitesAvailable.SUMMIT_GLITE: "OLCF Summit from OLCF Headnode",
     SitesAvailable.SUMMIT_KUBERNETES: "OLCF Summit from OLCF Hosted Kubernetes Pod"
 }
@@ -172,7 +174,34 @@ class MySite():
             lsf.add_env(key="PEGASUS_HOME", value=pegasus_home)
 
         self.sc.add_sites(lsf)
-                        
+
+    def sge(self, project_name, queue_name, pegasus_home):
+        sge = Site(self.exec_site_name) \
+            .add_directories(
+            Directory(Directory.SHARED_SCRATCH,
+                      os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"))
+            .add_file_servers(
+                FileServer("file://" + os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"),
+                           Operation.ALL))
+        ) \
+            .add_condor_profile(grid_resource="batch lsf") \
+            .add_pegasus_profile(
+            style="glite",
+            queue=queue_name,
+            data_configuration="sharedfs",
+            auxillary_local="true",
+            nodes=1,
+            runtime=1800,
+            clusters_num=2
+        )
+
+        if project_name:
+            sge.add_pegasus_profile(project=project_name)
+
+        if pegasus_home:
+            sge.add_env(key="PEGASUS_HOME", value=pegasus_home)
+
+        self.sc.add_sites(sge)
 
     def summit_glite(self, project_name, queue_name):
         summit = Site(self.exec_site_name)\
