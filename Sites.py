@@ -82,7 +82,7 @@ class MySite():
             self.lsf(project_name, queue_name, pegasus_home)
         elif target_site is SitesAvailable.SGE:
             self.exec_site_name = "sge"
-            self.lsf(project_name, queue_name, pegasus_home)
+            self.sge(project_name, queue_name, pegasus_home)
         elif target_site is SitesAvailable.SUMMIT_GLITE:
             self.exec_site_name = "summit"
             self.exec_site_arch = Arch.PPC64LE
