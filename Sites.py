@@ -169,6 +169,7 @@ class MySite():
                         data_configuration="sharedfs",
                         auxillary_local="true",
                         nodes=1,
+                        ppn=1,
                         runtime=1800,
                         clusters_num=2
                     )
@@ -197,6 +198,7 @@ class MySite():
             data_configuration="sharedfs",
             auxillary_local="true",
             nodes=1,
+            ppn=1,
             runtime=1800,
             clusters_num=2
         )
