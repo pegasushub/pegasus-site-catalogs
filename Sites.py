@@ -80,6 +80,9 @@ class MySite():
         elif target_site is SitesAvailable.LSF:
             self.exec_site_name = "lsf"
             self.lsf(project_name, queue_name, pegasus_home)
+        elif target_site is SitesAvailable.SGE:
+            self.exec_site_name = "sge"
+            self.lsf(project_name, queue_name, pegasus_home)
         elif target_site is SitesAvailable.SUMMIT_GLITE:
             self.exec_site_name = "summit"
             self.exec_site_arch = Arch.PPC64LE
@@ -187,7 +190,7 @@ class MySite():
                 FileServer("file://" + os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"),
                            Operation.ALL))
         ) \
-            .add_condor_profile(grid_resource="batch lsf") \
+            .add_condor_profile(grid_resource="batch sge") \
             .add_pegasus_profile(
             style="glite",
             queue=queue_name,
