@@ -9,15 +9,17 @@ from Pegasus.api import *
 class SitesAvailable(Enum):
     CONDORPOOL = 1
     SLURM = 2
-    LSF = 3
-    SGE = 4
-    SUMMIT_GLITE = 5
-    SUMMIT_KUBERNETES = 6
+    REMOTE_SLURM = 3
+    LSF = 4
+    SGE = 5
+    SUMMIT_GLITE = 6
+    SUMMIT_KUBERNETES = 7
 
 
 SitesAvailableDescription = {
     SitesAvailable.CONDORPOOL: "Local Machine Condor Pool",
     SitesAvailable.SLURM: "Local SLURM Cluster",
+    SitesAvailable.REMOTE_SLURM: "Remote SLURM Cluster",
     SitesAvailable.LSF: "Local LSF Cluster",
     SitesAvailable.SGE: "Local SGE Cluster",
     SitesAvailable.SUMMIT_GLITE: "OLCF Summit from OLCF Headnode",
@@ -27,6 +29,7 @@ SitesAvailableDescription = {
 
 SitesRequireQueue = [ 
     SitesAvailable.SLURM,
+    SitesAvailable.REMOTE_SLURM,
     SitesAvailable.LSF,
     SitesAvailable.SGE
 ]
@@ -34,13 +37,14 @@ SitesRequireQueue = [
 
 SitesRequirePegasusHome = [ 
     SitesAvailable.SLURM,
+    SitesAvailable.REMOTE_SLURM,
     SitesAvailable.LSF,
     SitesAvailable.SGE
 ]
 
-
 SitesMayRequireProject = [
     SitesAvailable.SLURM,
+    SitesAvailable.REMOTE_SLURM,
     SitesAvailable.LSF,
     SitesAvailable.SGE
 ]
@@ -49,6 +53,14 @@ SitesMayRequireProject = [
 SitesRequireProject = [
     SitesAvailable.SUMMIT_GLITE, 
     SitesAvailable.SUMMIT_KUBERNETES
+]
+
+SitesRequireScratch = [
+    SitesAvailable.REMOTE_SLURM
+]
+
+SitesRequireStorage = [
+    SitesAvailable.REMOTE_SLURM
 ]
 
 
@@ -75,6 +87,9 @@ class MySite():
             self.exec_site_name = "condorpool"
             self.condorpool()
         elif target_site is SitesAvailable.SLURM:
+            self.exec_site_name = "slurm"
+            self.slurm(project_name, queue_name, pegasus_home)
+        elif target_site is SitesAvailable.REMOTE_SLURM:
             self.exec_site_name = "slurm"
             self.slurm(project_name, queue_name, pegasus_home)
         elif target_site is SitesAvailable.LSF:
