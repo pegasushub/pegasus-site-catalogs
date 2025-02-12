@@ -63,9 +63,14 @@ SitesRequireStorage = [
     SitesAvailable.REMOTE_SLURM
 ]
 
+SitesAreRemote = [
+    SitesAvailable.REMOTE_SLURM
+]
+
 
 class MySite():
-    def __init__(self, scratch_parent_dir, storage_parent_dir, target_site:SitesAvailable, project_name="", queue_name="", pegasus_home=""):
+    def __init__(self, scratch_parent_dir, storage_parent_dir, target_site:SitesAvailable, project_name="", queue_name="", pegasus_home="", login_host="",
+        transfer_endpoint=""):
         self.shared_scratch_parent_dir = scratch_parent_dir
         self.local_storage_parent_dir = storage_parent_dir
 
@@ -90,8 +95,8 @@ class MySite():
             self.exec_site_name = "slurm"
             self.slurm(project_name, queue_name, pegasus_home)
         elif target_site is SitesAvailable.REMOTE_SLURM:
-            self.exec_site_name = "slurm"
-            self.slurm(project_name, queue_name, pegasus_home)
+            self.exec_site_name = "remote_slurm"
+            self.remote_slurm(project_name, queue_name, pegasus_home, login_host, transfer_endpoint)
         elif target_site is SitesAvailable.LSF:
             self.exec_site_name = "lsf"
             self.lsf(project_name, queue_name, pegasus_home)
@@ -170,6 +175,43 @@ class MySite():
 
         self.sc.add_sites(slurm)
 
+    def remote_slurm(self, project_name, queue_name, pegasus_home, login_host="", transfer_endpoint=""):
+        if not transfer_endpoint:
+            transfer_endpoint = "file://"
+
+        slurm = (Site(self.exec_site_name) \
+            .add_directories(
+            Directory(Directory.SHARED_SCRATCH,
+                      os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"))
+            .add_file_servers(
+                FileServer(
+                    transfer_endpoint + os.path.join(self.shared_scratch_parent_dir, self.exec_site_name, "scratch"),
+                    Operation.ALL))
+        ) \
+            .add_grids(
+            Grid(grid_type="batch", scheduler_type=Scheduler.SLURM, contact=login_host, job_type="compute")
+        )
+            .add_grids(
+            Grid(grid_type="batch", scheduler_type=Scheduler.SLURM, contact=login_host, job_type="auxillary")
+        )
+            .add_pegasus_profile(
+            style="ssh",
+            queue=queue_name,
+            data_configuration="sharedfs",
+            auxillary_local="false",
+            nodes=1,
+            ppn=1,
+            runtime=1800,
+            clusters_num=2
+        ))
+
+        if project_name:
+            slurm.add_pegasus_profile(project=project_name)
+
+        if pegasus_home:
+            slurm.add_env(key="PEGASUS_HOME", value=pegasus_home)
+
+        self.sc.add_sites(slurm)
 
     def lsf(self, project_name, queue_name, pegasus_home):
         lsf = Site(self.exec_site_name)\
