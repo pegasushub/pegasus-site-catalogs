@@ -189,10 +189,10 @@ class MySite():
                     Operation.ALL))
         ) \
             .add_grids(
-            Grid(grid_type="batch", scheduler_type=Scheduler.SLURM, contact=login_host, job_type="compute")
+            Grid(grid_type=Grid.BATCH, scheduler_type=Scheduler.SLURM, contact=login_host, job_type=SupportedJobs.COMPUTE)
         )
             .add_grids(
-            Grid(grid_type="batch", scheduler_type=Scheduler.SLURM, contact=login_host, job_type="auxillary")
+            Grid(grid_type=Grid.BATCH, scheduler_type=Scheduler.SLURM, contact=login_host, job_type=SupportedJobs.AUXILLARY)
         )
             .add_pegasus_profile(
             style="ssh",
