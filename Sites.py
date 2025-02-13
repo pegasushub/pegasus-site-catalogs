@@ -179,6 +179,8 @@ class MySite():
         if not transfer_endpoint:
             transfer_endpoint = "file://"
 
+        auxillary_local = "true" if transfer_endpoint == "file://" else "false"
+
         slurm = (Site(self.exec_site_name) \
             .add_directories(
             Directory(Directory.SHARED_SCRATCH,
@@ -198,7 +200,7 @@ class MySite():
             style="ssh",
             queue=queue_name,
             data_configuration="sharedfs",
-            auxillary_local="false",
+            auxillary_local=auxillary_local,
             nodes=1,
             ppn=1,
             runtime=1800,
