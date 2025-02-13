@@ -359,8 +359,20 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
     show_default=True,
     help="Parent directory of output folder"
 )
+@click.option(
+    "--login-host",
+    default=None,
+    show_default=True,
+    help="login host for a remote cluster to which jobs are to be submitted"
+)
+@click.option(
+    "--transfer-endpoint",
+    default=None,
+    show_default=True,
+    help="transfer endpoint for the remote cluster to use for data transfers"
+)
 
-def main(scratch_parent_dir, storage_parent_dir, execution_site, project_name, queue_name, pegasus_home):
+def main(scratch_parent_dir, storage_parent_dir, execution_site, project_name, queue_name, pegasus_home, login_host, transfer_endpoint):
     execution_site = SitesAvailable[execution_site]
     
     if execution_site in SitesRequireQueue and queue_name is None:
@@ -383,8 +395,10 @@ def main(scratch_parent_dir, storage_parent_dir, execution_site, project_name, q
     
     if pegasus_home:
         click.echo("The PEGASUS_HOME location is \"{}\"".format(pegasus_home))
-    
-    exec_site = MySite(scratch_parent_dir, storage_parent_dir, execution_site, project_name=project_name, queue_name=queue_name, pegasus_home=pegasus_home)
+
+    exec_site = MySite(scratch_parent_dir, storage_parent_dir, execution_site, project_name=project_name,
+                       queue_name=queue_name, pegasus_home=pegasus_home, login_host=login_host,
+                       transfer_endpoint=transfer_endpoint)
     exec_site.write()
 
 if __name__ == "__main__":
