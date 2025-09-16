@@ -385,8 +385,14 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
     show_default=True,
     help="transfer endpoint for the remote cluster to use for data transfers"
 )
+@click.option(
+    "--remote-scratch-parent-dir",
+    default=None,
+    show_default=True,
+    help="the scratch dir to use for the remote cluster"
+)
 def main(scratch_parent_dir, storage_parent_dir, execution_site, project_name, queue_name, pegasus_home, login_host,
-         transfer_endpoint):
+         transfer_endpoint, remote_scratch_parent_dir):
     execution_site = SitesAvailable[execution_site]
 
     if execution_site in SitesRequireQueue and queue_name is None:
@@ -413,7 +419,7 @@ def main(scratch_parent_dir, storage_parent_dir, execution_site, project_name, q
 
     exec_site = MySite(scratch_parent_dir, storage_parent_dir, execution_site, project_name=project_name,
                        queue_name=queue_name, pegasus_home=pegasus_home, login_host=login_host,
-                       transfer_endpoint=transfer_endpoint)
+                       transfer_endpoint=transfer_endpoint, remote_shared_scratch_parent_dir=remote_scratch_parent_dir )
     exec_site.write()
 
 
