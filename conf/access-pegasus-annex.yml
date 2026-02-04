@@ -1,0 +1,17 @@
+x-pegasus:
+  apiLang: python
+  createdBy: vahi
+  createdOn: 02-03-26T23:53:17Z
+pegasus: 5.0.4
+sites:
+- name: condorpool
+  directories: []
+  profiles:
+    condor:
+      universe: container
+      requirements: TestPool =!= True
+    env:
+      LANG: C
+      PYTHONUNBUFFERED: '1'
+    pegasus:
+      style: condor
