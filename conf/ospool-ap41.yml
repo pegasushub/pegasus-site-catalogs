@@ -1,0 +1,17 @@
+sites:
+- name: compute
+  directories: []
+  profiles:
+    condor:
+      universe: container
+    pegasus:
+      style: condor
+- name: staging
+  directories:
+  - type: sharedScratch
+    path: /ospool/ap41/data/${USER}/staging
+    sharedFileSystem: false
+    fileServers:
+    - url: pelican:///ospool/ap41/data/${USER}/staging
+      operation: all
+
