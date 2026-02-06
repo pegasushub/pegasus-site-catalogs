@@ -4,7 +4,7 @@ x-pegasus:
   createdOn: 02-03-26T23:53:17Z
 pegasus: 5.0.4
 sites:
-- name: condorpool
+- name: compute
   directories: []
   profiles:
     condor:
