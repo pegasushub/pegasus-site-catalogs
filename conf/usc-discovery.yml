@@ -1,0 +1,36 @@
+# site catalog file to be used when running on
+# USC Discovery cluster. This is for direct submissions
+# to the SLURM cluster
+x-pegasus:
+  apiLang: python
+  createdBy: vahi
+  createdOn: 02-07-26T00:00:00Z
+pegasus: 5.0.4
+sites:
+- name: compute
+  directories:
+  - type: sharedScratch
+    path: ${HOME}/SLURM/work
+    sharedFileSystem: false
+    fileServers:
+    - url: file://${HOME}/SLURM/work
+      operation: all
+  - type: localStorage
+    path: ${HOME}/SLURM/storage
+    sharedFileSystem: false
+    fileServers:
+    - url: file://${HOME}/SLURM/storage
+      operation: all
+  profiles:
+    condor:
+      grid_resource: batch slurm
+    pegasus:
+      style: glite
+      queue: main
+      project: hpcsuppt_613
+      data.configuration: nonsharedfs
+      auxillary.local: 'true'
+      nodes: 1
+      ppn: 1
+      runtime: 1800
+      clusters.num: 2
