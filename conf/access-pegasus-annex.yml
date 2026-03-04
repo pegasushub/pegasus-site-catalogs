@@ -9,6 +9,9 @@ sites:
   profiles:
     condor:
       universe: container
+      # add the profile below in your wf generator
+      # if you are using your own allocation via condor annex 
+      #requirements: TestPool =!= True
     env:
       LANG: C
       PYTHONUNBUFFERED: '1'
