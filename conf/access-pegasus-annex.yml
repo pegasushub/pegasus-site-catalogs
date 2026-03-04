@@ -9,7 +9,6 @@ sites:
   profiles:
     condor:
       universe: container
-      requirements: TestPool =!= True
     env:
       LANG: C
       PYTHONUNBUFFERED: '1'
