@@ -1,0 +1,30 @@
+x-pegasus:
+  apiLang: python
+  createdBy: vahi
+  createdOn: 03-09-26T19:16:15Z
+pegasus: 5.0.4
+sites:
+- name: compute
+  directories:
+  - type: sharedScratch
+    path: /expanse/lustre/scratch/${EXPANSE_USERNAME}/temp_project/pegasuswfs/scratch
+    sharedFileSystem: false
+    fileServers:
+    - url: file:///expanse/lustre/scratch/${EXPANSE_USERNAME}/temp_project/pegasuswfs/scratch
+      operation: all
+  - type: localStorage
+    path: /home/{EXPANSE_USERNAME}/pegasuswfs/outputs
+    sharedFileSystem: false
+    fileServers:
+    - url: file:///home/{EXPANSE_USERNAME}/pegasuswfs/outputs
+      operation: all
+  profiles:
+    condor:
+      requirements: TestPool =!= True
+    env:
+      LANG: C
+      PYTHONUNBUFFERED: '1'
+    pegasus:
+      style: condor
+      data.configuration: nonsharedfs
+      pegasus_lite_env_source: ${BASE_DIR}/../tools/job-env-setup.sh
