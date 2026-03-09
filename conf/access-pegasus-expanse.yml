@@ -28,4 +28,4 @@ sites:
       style: condor
       data.configuration: nonsharedfs
 #     we load the source via properties using add_site_profile function.
-#     pegasus_lite_env_source: ${BASE_DIR}/../tools/job-env-setup.sh
+#     pegasus_lite_env_source: /path/to/job-env-setup.sh
