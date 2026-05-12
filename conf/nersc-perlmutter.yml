@@ -1,0 +1,37 @@
+x-pegasus:
+  apiLang: python
+  createdBy: vahi
+  createdOn: 05-12-26T22:30:02Z
+pegasus: 5.0.4
+sites:
+- name: compute
+  directories:
+  - type: sharedScratch
+    path: /global/cfs/cdirs/${NERSC_PROJECT}/${NERSC_USERNAME}/wf-scratch
+    sharedFileSystem: false
+    fileServers:
+    - url: file:///global/cfs/cdirs/${NERSC_PROJECT}/${NERSC_USERNAME}/wf-scratch
+      operation: all
+  - type: localStorage
+    path: /global/cfs/cdirs/${NERSC_PROJECT}/${NERSC_USERNAME}/wf-outputs
+    sharedFileSystem: false
+    fileServers:
+    - url: file:///global/cfs/cdirs/${NERSC_PROJECT}/${NERSC_USERNAME}/wf-outputs
+      operation: all
+  grids:
+  - type: sfapi
+    contact: perlmutter
+    scheduler: slurm
+    jobtype: compute
+  profiles:
+    env:
+      PEGASUS_HOME: /global/common/software/m4144/software/install/pegasus/default/bin/..
+    pegasus:
+      style: glite
+      queue: debug
+      project: ${NERSC_PROJECT}
+      cores: 1
+      memory: 1024
+      runtime: 1800
+      clusters.num: 2
+      glite.arguments: -C cpu
