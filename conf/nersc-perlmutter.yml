@@ -35,3 +35,12 @@ sites:
       runtime: 1800
       clusters.num: 2
       glite.arguments: -C cpu
+  x-tags:
+   - name: gpu
+     profiles:
+       pegasus:
+         glite.arguments: -C gpu
+   - name: cpu
+     profiles:
+       pegasus:
+         glite.arguments: -C cpu
