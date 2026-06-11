@@ -40,6 +40,7 @@ sites:
        pegasus:
          glite.arguments: -C gpu
          gpus: 1
+         queue: regular
    - name: cpu
      profiles:
        pegasus:
