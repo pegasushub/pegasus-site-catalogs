@@ -30,7 +30,6 @@ sites:
       style: glite
       queue: debug
       project: ${NERSC_PROJECT}
-      cores: 1
       memory: 1024
       runtime: 1800
       clusters.num: 2
@@ -40,7 +39,9 @@ sites:
      profiles:
        pegasus:
          glite.arguments: -C gpu
+	 gpus: 1
    - name: cpu
      profiles:
        pegasus:
+         cores: 1
          glite.arguments: -C cpu
