@@ -39,7 +39,7 @@ sites:
      profiles:
        pegasus:
          glite.arguments: -C gpu
-	 gpus: 1
+         gpus: 1
    - name: cpu
      profiles:
        pegasus:
