@@ -7,16 +7,16 @@ sites:
 - name: compute
   directories:
   - type: sharedScratch
-    path: /global/cfs/cdirs/${NERSC_PROJECT}/${NERSC_USERNAME}/wf-scratch
+    path: /global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-scratch
     sharedFileSystem: false
     fileServers:
-    - url: file:///global/cfs/cdirs/${NERSC_PROJECT}/${NERSC_USERNAME}/wf-scratch
+    - url: file:///global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-scratch
       operation: all
   - type: localStorage
-    path: /global/cfs/cdirs/${NERSC_PROJECT}/${NERSC_USERNAME}/wf-outputs
+    path: /global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-outputs
     sharedFileSystem: false
     fileServers:
-    - url: file:///global/cfs/cdirs/${NERSC_PROJECT}/${NERSC_USERNAME}/wf-outputs
+    - url: file:///global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-outputs
       operation: all
   grids:
   - type: sfapi
@@ -29,7 +29,7 @@ sites:
     pegasus:
       style: glite
       queue: debug
-      project: ${NERSC_PROJECT}
+      project: ${RESOURCE_PROJECT}
       memory: 1024
       runtime: 1800
       clusters.num: 2
