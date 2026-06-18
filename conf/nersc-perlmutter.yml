@@ -24,8 +24,9 @@ sites:
     scheduler: slurm
     jobtype: compute
   profiles:
-    env:
-      PEGASUS_HOME: /global/common/software/m4144/software/install/pegasus/default/bin/..
+#    only uncomment if trying to run in shared fs configuration with no containers.
+#    env:
+#      PEGASUS_HOME: /global/common/software/m4144/software/install/pegasus/default/bin/..
     pegasus:
       style: glite
       queue: debug
