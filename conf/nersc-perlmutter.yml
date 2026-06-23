@@ -47,3 +47,4 @@ sites:
        pegasus:
          cores: 1
          glite.arguments: -C cpu
+         container.arguments: --module none
