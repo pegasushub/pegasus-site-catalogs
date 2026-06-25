@@ -7,16 +7,16 @@ sites:
 - name: compute
   directories:
   - type: sharedScratch
-    path: /expanse/lustre/scratch/${EXPANSE_USERNAME}/temp_project/pegasuswfs/scratch
+    path: /expanse/lustre/scratch/${RESOURCE_USERNAME}/temp_project/pegasuswfs/scratch
     sharedFileSystem: false
     fileServers:
-    - url: file:///expanse/lustre/scratch/${EXPANSE_USERNAME}/temp_project/pegasuswfs/scratch
+    - url: file:///expanse/lustre/scratch/${RESOURCE_USERNAME}/temp_project/pegasuswfs/scratch
       operation: all
   - type: localStorage
-    path: /home/{EXPANSE_USERNAME}/pegasuswfs/outputs
+    path: /home/{RESOURCE_USERNAME}/pegasuswfs/outputs
     sharedFileSystem: false
     fileServers:
-    - url: file:///home/{EXPANSE_USERNAME}/pegasuswfs/outputs
+    - url: file:///home/{RESOURCE_USERNAME}/pegasuswfs/outputs
       operation: all
   profiles:
     condor:
