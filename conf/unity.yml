@@ -1,0 +1,35 @@
+# site catalog file to be used when running on
+# Unity HPC. This is for direct submissions
+# to the SLURM cluster
+x-pegasus:
+  apiLang: python
+  createdBy: baldikacti_umass_edu
+  createdOn: 03-12-26T12:45:42Z
+pegasus: 5.0.4
+sites:
+- name: compute
+  directories:
+  - type: sharedScratch
+    path: ${PWD}/SLURM/work
+    sharedFileSystem: false
+    fileServers:
+    - url: file://${PWD}/SLURM/work
+      operation: all
+  - type: localStorage
+    path: ${PWD}/SLURM/storage
+    sharedFileSystem: false
+    fileServers:
+    - url: file://${PWD}/SLURM/storage
+      operation: all
+  profiles:
+    condor:
+      grid_resource: batch slurm
+    pegasus:
+      style: glite
+      queue: cpu-preempt
+      data.configuration: nonsharedfs
+      auxillary.local: 'true'
+      nodes: 1
+      cores: 1
+      memory: 8192
+      runtime: 7200
