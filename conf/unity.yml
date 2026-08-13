@@ -26,10 +26,17 @@ sites:
       grid_resource: batch slurm
     pegasus:
       style: glite
-      queue: cpu-preempt
+      queue: cpu
       data.configuration: nonsharedfs
       auxillary.local: 'true'
       nodes: 1
       cores: 1
       memory: 8192
       runtime: 7200
+  x-tags:
+    - name: gpu
+      profiles:
+        pegasus:
+          queue: gpu
+          gpus: 1
+          container.arguments: --nv
