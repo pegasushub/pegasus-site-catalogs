@@ -47,5 +47,5 @@ sites:
        pegasus:
          cores: 1
          glite.arguments: -C cpu
-	 queue: shared
+         queue: shared
          container.arguments: --module none
