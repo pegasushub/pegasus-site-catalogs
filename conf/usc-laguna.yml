@@ -1,0 +1,37 @@
+# site catalog file to be used when running on
+# Laguna Cluster managed by USC as part of
+# SoCal Research Computing Consortium.
+# This is for direct submissions to the SLURM cluster.
+x-pegasus:
+  apiLang: python
+  createdBy: osinski@usc.edu
+  createdOn: 08-24-26T00:00:00Z
+pegasus: 5.0.4
+sites:
+- name: compute
+  directories:
+  - type: sharedScratch
+    path: ${HOME}/SLURM/work
+    sharedFileSystem: false
+    fileServers:
+    - url: file://${HOME}/SLURM/work
+      operation: all
+  - type: localStorage
+    path: ${HOME}/SLURM/storage
+    sharedFileSystem: false
+    fileServers:
+    - url: file://${HOME}/SLURM/storage
+      operation: all
+  profiles:
+    condor:
+      grid_resource: batch slurm
+    pegasus:
+      style: glite
+      queue: compute
+      project: ${RESOURCE_PROJECT}
+      data.configuration: nonsharedfs
+      auxillary.local: 'true'
+      nodes: 1
+      ppn: 1
+      runtime: 1800
+      clusters.num: 2
