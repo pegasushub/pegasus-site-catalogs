@@ -25,6 +25,9 @@ sites:
   profiles:
     condor:
       grid_resource: batch slurm
+    env:
+      # setup script does module load apptainer
+      PEGASUS_LITE_ENV_SOURCE: /apps/conda/envs/ood-jupyterlab-pegasus/job-env-setup.sh
     pegasus:
       style: glite
       queue: compute
