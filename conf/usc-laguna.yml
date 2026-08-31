@@ -28,6 +28,8 @@ sites:
     env:
       # setup script does module load apptainer
       PEGASUS_LITE_ENV_SOURCE: /apps/conda/envs/ood-jupyterlab-pegasus/job-env-setup.sh
+      # get the jobs to run in their project directories
+      PEGASUS_WN_TMP: /project/${RESOURCE_PROJECT}
     pegasus:
       style: glite
       queue: compute
