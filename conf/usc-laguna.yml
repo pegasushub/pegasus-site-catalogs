@@ -40,3 +40,14 @@ sites:
       ppn: 1
       runtime: 1800
       clusters.num: 2
+  x-tags:
+    - name: gpu
+      profiles:
+        pegasus:
+          gpus: 1
+          queue: gpu
+    - name: cpu
+      profiles:
+        pegasus:
+          cores: 1
+          queue: compute
