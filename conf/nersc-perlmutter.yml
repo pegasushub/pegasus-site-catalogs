@@ -10,13 +10,13 @@ sites:
     path: /global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-scratch
     sharedFileSystem: false
     fileServers:
-    - url: file:///global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-scratch
+    - url: scp://${RESOURCE_USERNAME}@perlmutter.nersc.gov/global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-scratch
       operation: all
   - type: localStorage
     path: /global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-outputs
     sharedFileSystem: false
     fileServers:
-    - url: file:///global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-outputs
+    - url: scp://${RESOURCE_USERNAME}@perlmutter.nersc.gov/global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-outputs
       operation: all
   grids:
   - type: sfapi
@@ -34,6 +34,7 @@ sites:
       memory: 1024
       runtime: 1800
       clusters.num: 2
+      data.configuration: nonsharedfs
       glite.arguments: -C cpu
   x-tags:
    - name: gpu
