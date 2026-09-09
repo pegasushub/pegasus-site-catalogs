@@ -8,13 +8,13 @@ sites:
   directories:
   - type: sharedScratch
     path: /global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-scratch
-    sharedFileSystem: false
+    sharedFileSystem: true
     fileServers:
     - url: scp://${RESOURCE_USERNAME}@perlmutter.nersc.gov/global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-scratch
       operation: all
   - type: localStorage
     path: /global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-outputs
-    sharedFileSystem: false
+    sharedFileSystem: true
     fileServers:
     - url: scp://${RESOURCE_USERNAME}@perlmutter.nersc.gov/global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-outputs
       operation: all
