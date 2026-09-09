@@ -7,10 +7,10 @@ sites:
 - name: compute
   directories:
   - type: sharedScratch
-    path: /global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-scratch
+    path: ${RESOURCE_SCRATCH_DIR}/wf-scratch
     sharedFileSystem: true
     fileServers:
-    - url: scp://${RESOURCE_USERNAME}@perlmutter.nersc.gov/global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-scratch
+    - url: scp://${RESOURCE_USERNAME}@perlmutter.nersc.gov/${RESOURCE_SCRATCH_DIR}/wf-scratch
       operation: all
   - type: localStorage
     path: /global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-outputs
