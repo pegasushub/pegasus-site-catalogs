@@ -10,13 +10,13 @@ sites:
     path: ${RESOURCE_SCRATCH_DIR}/wf-scratch
     sharedFileSystem: true
     fileServers:
-    - url: scp://${RESOURCE_USERNAME}@perlmutter.nersc.gov/${RESOURCE_SCRATCH_DIR}/wf-scratch
+    - url: scp://${RESOURCE_USERNAME}@dtn01.nersc.gov/${RESOURCE_SCRATCH_DIR}/wf-scratch
       operation: all
   - type: localStorage
     path: /global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-outputs
     sharedFileSystem: true
     fileServers:
-    - url: scp://${RESOURCE_USERNAME}@perlmutter.nersc.gov/global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-outputs
+    - url: scp://${RESOURCE_USERNAME}@dtn01.nersc.gov/global/cfs/cdirs/${RESOURCE_PROJECT}/${RESOURCE_USERNAME}/wf-outputs
       operation: all
   grids:
   - type: sfapi
