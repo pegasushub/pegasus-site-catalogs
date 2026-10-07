@@ -26,7 +26,7 @@ sites:
       grid_resource: batch slurm
     pegasus:
       style: glite
-      queue: compute
+      queue: shared
       project: ${RESOURCE_PROJECT}
       data.configuration: nonsharedfs
       auxillary.local: 'true'
