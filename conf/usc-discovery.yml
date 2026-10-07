@@ -27,7 +27,7 @@ sites:
     pegasus:
       style: glite
       queue: main
-      project: hpcsuppt_613
+      project: ${RESOURCE_PROJECT}
       data.configuration: nonsharedfs
       auxillary.local: 'true'
       nodes: 1
