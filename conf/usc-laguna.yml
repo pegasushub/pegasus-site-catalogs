@@ -11,10 +11,10 @@ sites:
 - name: compute
   directories:
   - type: sharedScratch
-    path: ${HOME}/SLURM/work
+    path: /scratch/${RESOURCE_USERNAME}/SLURM/work
     sharedFileSystem: false
     fileServers:
-    - url: file://${HOME}/SLURM/work
+    - url: file:///scratch/${RESOURCE_USERNAME}/SLURM/work
       operation: all
   - type: localStorage
     path: ${HOME}/SLURM/storage
